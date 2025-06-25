@@ -25,28 +25,36 @@ and test JAX, Keras (with JAX backend) on TPUs.
     And you may need to re-export the environment variables if they were not added to `~/.bashrc` or similar.
 
 ## Requesting TPU Resources (Queued Resources)
+### SPOT VM Queued Resource (preemptible)
+```bash
+gcloud alpha compute tpus queued-resources create my-v4-8-spot-req \
+    --node-id my-v4-8-spot \
+    --project smiling-diode-462109-g0 \
+    --zone us-central2-b \
+    --accelerator-type v4-8 \
+    --runtime-version tpu-ubuntu2204-base \
+    --spot \
+    --provisioning-model=SPOT
+```
 
-The scripts in the `scripts/` directory help you submit requests to create TPU VMs via Queued Resources.
-**NOTE:** Please replace `PROJECT_ID`, `ZONE`, `NODE_ID`, `QR_REQUEST_NAME` in these scripts with your values if needed.
+### Standard VM Queued Resource (on-demand)
+```bash
+gcloud alpha compute tpus queued-resources create my-v4-8-ondemand-req \
+    --node-id my-v4-8-ondemand \
+    --project smiling-diode-462109-g0 \
+    --zone us-central2-b \
+    --accelerator-type v4-8 \
+    --runtime-version tpu-ubuntu2204-base
+```
 
-*   **Create Spot TPU VM:**
-    ```bash
-    chmod +x scripts/submit_spot_tpu_qr.sh
-    ./scripts/submit_spot_tpu_qr.sh
-    ```
+After submitting a request, you can check its status using:
+```bash
+gcloud alpha compute tpus queued-resources list --zone <YOUR_ZONE> --project <YOUR_PROJECT_ID>
+gcloud alpha compute tpus queued-resources describe <YOUR_QR_REQUEST_NAME> --zone <YOUR_ZONE> --project <YOUR_PROJECT_ID>
+```
+Once the Queued Resource is provisioned and the TPU VM is ready, you can SSH into the node.
 
-*   **Create On-Demand TPU VM:**
-    ```bash
-    chmod +x scripts/submit_ondemand_tpu_qr.sh
-    ./scripts/submit_ondemand_tpu_qr.sh
-    ```
-
-    After submitting a request, you can check its status using:
-    ```bash
-    gcloud alpha compute tpus queued-resources list --zone <YOUR_ZONE> --project <YOUR_PROJECT_ID>
-    gcloud alpha compute tpus queued-resources describe <YOUR_QR_REQUEST_NAME> --zone <YOUR_ZONE> --project <YOUR_PROJECT_ID>
-    ```
-    Once the Queued Resource is provisioned and the TPU VM is ready, you can SSH into the node.
+* If you wand ssh from local, check: https://cloud.google.com/compute/docs/connect/create-ssh-keys
 
 ## Running Test Scripts
 
