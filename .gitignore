@@ -1,0 +1,77 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg-info/
+*.so
+*.coverage
+.pytest_cache/
+htmlcov/
+
+# Virtual Environments - IMPORTANT for personal setup
+my_env/
+*.env
+*.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/ # Common venv name
+.cache/
+# IDE / Editor specific
+.vscode/
+.idea/
+*.project
+*.classpath
+*.cproject
+*.launch
+*.sublime-workspace
+*.sublime-project
+nbproject/ # NetBeans
+*.tmproj # TextMate
+
+# OS specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*~
+*.bak
+*.tmp
+*.swp
+*.swo
+
+# Logs & data files you might not want to commit
+*.log
+logs/
+data/ # If you have a 'data' folder with large datasets, consider ignoring it
+output/
+results/
+*.csv # If CSVs are generated results, not source data
+*.pkl
+*.pickle
+*.h5 # Keras model files, often large
+*.pth # PyTorch model files, often large
+*.pt  # PyTorch model files, often large
+*.onnx
+
+# Specific personal or sensitive files (add your own)
+.profile
+.bashrc
+.gitconfig
+.bash_history
+.keras/keras.json
+.ssh/authorized_keys
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Terraform (if you use it for infrastructure)
+.terraform/
+*.tfstate
+*.tfstate.*
+
+.cache
+.cache/
